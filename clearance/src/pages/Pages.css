@@ -1,0 +1,162 @@
+/* ---------- General Page Styles ---------- */
+body {
+  background-color: #F5F7FA;
+  font-family: 'Inter', sans-serif;
+  color: #1F2937; /* primary text */
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #0096FF; /* primary blue for headers */
+  margin: 0 0 10px 0;
+}
+
+p, span, li {
+  color: #6B7280; /* text gray for secondary text */
+}
+
+/* ---------- Navbar ---------- */
+.navbar {
+  background-color: #005BB5; /* dark blue */
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #FFFFFF;
+}
+
+.navbar a {
+  color: #FFFFFF;
+  text-decoration: none;
+  margin-right: 15px;
+}
+
+.navbar a:hover {
+  color: #0096FF; /* primary blue on hover */
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  background-color: #0096FF;
+  color: #FFFFFF;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.btn:hover {
+  background-color: #007ACC;
+}
+
+.btn-secondary {
+  background-color: #F5F7FA;
+  color: #0096FF;
+  border: 2px solid #0096FF;
+}
+
+.btn-secondary:hover {
+  background-color: #0096FF;
+  color: #FFFFFF;
+}
+
+/* ---------- Cards ---------- */
+.card {
+  background-color: #FFFFFF;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+/* ---------- Inputs / Forms ---------- */
+input, select, textarea {
+  background-color: #FFFFFF;
+  border: 1px solid #D1D5DB; /* light gray border */
+  border-radius: 8px;
+  padding: 10px;
+  width: 100%;
+  font-size: 16px;
+  color: #1F2937;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: #0096FF;
+  box-shadow: 0 0 0 2px rgba(0,150,255,0.2);
+}
+
+/* ---------- Tables ---------- */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #FFFFFF;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+th {
+  background-color: #0096FF;
+  color: #FFFFFF;
+  padding: 10px;
+  text-align: left;
+}
+
+td {
+  padding: 10px;
+  border-bottom: 1px solid #E5E7EB;
+  color: #1F2937;
+}
+
+/* ---------- Status Indicators ---------- */
+.status-cleared {
+  color: #22C55E;
+  font-weight: 600;
+}
+
+.status-pending {
+  color: #FBBF24;
+  font-weight: 600;
+}
+
+.status-rejected {
+  color: #EF4444;
+  font-weight: 600;
+}
+
+/* ---------- Links ---------- */
+a {
+  color: #0096FF;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* ---------- Responsive / Mobile ---------- */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .navbar a {
+    margin: 5px 0;
+  }
+
+  .card {
+    padding: 15px;
+  }
+
+  input, select, textarea {
+    font-size: 14px;
+  }
+
+  .btn {
+    padding: 8px 16px;
+  }
+}
