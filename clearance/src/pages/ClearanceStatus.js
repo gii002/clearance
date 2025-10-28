@@ -1,101 +1,67 @@
 import React, { useState } from "react";
-import { FaArrowLeft, FaCheckCircle, FaTimesCircle, FaClock } from "react-icons/fa";
+import { FaArrowLeft } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import "./Pages.css";
+import "./ClearanceStatus.css";
 
 function ClearanceStatus() {
-  const [departments, setDepartments] = useState([
-    {
-      name: "Library",
-      status: "Cleared",
-      officer: "Mrs. Phiri",
-      date: "2025-10-20",
-      remarks: "No outstanding books.",
-    },
-    {
-      name: "Finance",
-      status: "Pending",
-      officer: "Mr. Banda",
-      date: null,
-      remarks: "Tuition balance not cleared.",
-    },
-    {
-      name: "Sports",
-      status: "Cleared",
-      officer: "Mr. Mbewe",
-      date: "2025-10-21",
-      remarks: "All equipment returned.",
-    },
-    {
-      name: "Accommodation",
-      status: "Pending",
-      officer: "Mrs. Kamphale",
-      date: null,
-      remarks: "Room inspection scheduled.",
-    },
-    {
-      name: "Registrar",
-      status: "Pending",
-      officer: "Dr. Chirwa",
-      date: null,
-      remarks: "Awaiting all department clearances.",
-    },
+  const [departments] = useState([
+    { name: "Library", status: "Cleared", officer: "Mrs. Phiri", date: "2025-10-20", remarks: "No outstanding books." },
+    { name: "Finance", status: "Pending", officer: "Mr. Banda", date: null, remarks: "Tuition balance not cleared." },
+    { name: "Sports", status: "Cleared", officer: "Mr. Mbewe", date: "2025-10-21", remarks: "All equipment returned." },
+    { name: "Accommodation", status: "Pending", officer: "Mrs. Kamphale", date: null, remarks: "Room inspection scheduled." },
+    { name: "Registrar", status: "Pending", officer: "Dr. Chirwa", date: null, remarks: "Awaiting all department clearances." },
   ]);
 
+  // Map status to percentage for visual bar
+  const statusPercent = (status) => {
+    if (status === "Cleared") return 100;
+    if (status === "Pending") return 50;
+    return 0;
+  };
+
+  const statusClass = (status) => {
+    if (status === "Cleared") return "status-cleared";
+    if (status === "Pending") return "status-pending";
+    return "status-rejected";
+  };
+
   return (
-    <div className="max-w-4xl mx-auto mt-8 bg-white shadow-md rounded-lg p-6">
-      <div className="flex items-center mb-6">
-        <Link to="/student" className="text-blue-600 hover:text-blue-800 flex items-center">
+    <div className="clearance-container">
+      <div className="clearance-header">
+        <Link to="/student">
           <FaArrowLeft className="mr-2" /> Back
         </Link>
-        <h2 className="text-xl font-semibold text-center flex-grow text-blue-700">
-          Clearance Status Details
-        </h2>
+        <h2>Clearance Status Dashboard</h2>
       </div>
 
-      <div className="overflow-x-auto">
-        <table className="w-full border border-gray-300 rounded-lg text-sm">
-          <thead className="bg-blue-700 text-white">
-            <tr>
-              <th className="p-3 text-left">Department</th>
-              <th className="p-3 text-left">Status</th>
-              <th className="p-3 text-left">Officer</th>
-              <th className="p-3 text-left">Date</th>
-              <th className="p-3 text-left">Remarks</th>
-            </tr>
-          </thead>
-          <tbody>
-            {departments.map((dept, index) => (
-              <tr key={index} className="border-b hover:bg-gray-50 transition">
-                <td className="p-3 font-medium">{dept.name}</td>
-                <td className="p-3">
-                  {dept.status === "Cleared" ? (
-                    <span className="flex items-center text-green-600">
-                      <FaCheckCircle className="mr-2" /> Cleared
-                    </span>
-                  ) : dept.status === "Pending" ? (
-                    <span className="flex items-center text-yellow-600">
-                      <FaClock className="mr-2" /> Pending
-                    </span>
-                  ) : (
-                    <span className="flex items-center text-red-600">
-                      <FaTimesCircle className="mr-2" /> Rejected
-                    </span>
-                  )}
-                </td>
-                <td className="p-3">{dept.officer}</td>
-                <td className="p-3">{dept.date || "-"}</td>
-                <td className="p-3">{dept.remarks}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      <div className="department-list">
+        {departments.map((dept, idx) => (
+          <div key={idx} className="department-item">
+            <div className="department-header">
+              <span>{dept.name}</span>
+              <span className={`status-text ${statusClass(dept.status)}`}>
+                {dept.status}
+              </span>
+            </div>
+
+            <div className="status-bar-container">
+              <div
+                className={`status-bar ${statusClass(dept.status)}`}
+                style={{ width: `${statusPercent(dept.status)}%` }}
+              ></div>
+            </div>
+
+            <div className="department-details">
+              <span>Officer: {dept.officer}</span>
+              <span>Date: {dept.date || "-"}</span>
+              <span>Remarks: {dept.remarks}</span>
+            </div>
+          </div>
+        ))}
       </div>
 
-      <div className="mt-6 text-center">
-        <p className="text-gray-600 text-sm">
-          <strong>Note:</strong> Please follow up with pending departments to complete your clearance process.
-        </p>
+      <div className="clearance-note">
+        <strong>Note:</strong> Follow up with pending departments to complete your clearance process.
       </div>
     </div>
   );

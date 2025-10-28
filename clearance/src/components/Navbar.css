@@ -1,0 +1,121 @@
+.navbar {
+  background-color: #005BB5;
+  color: #fff;
+  padding: 16px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  font-family: Arial, sans-serif;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+.navbar h1 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.nav-links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Horizontal layout for larger screens */
+@media(min-width: 768px) {
+  .navbar {
+    flex-direction: row;
+  }
+  .navbar h1 {
+    margin-bottom: 0;
+  }
+  .nav-links {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+/* Navbar Links */
+.nav-links a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+}
+
+.nav-links a:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Sign Out Button */
+.nav-links button {
+  background-color: #EF4444;
+  color: white;
+  font-weight: 600;
+  padding: 6px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.nav-links button:hover {
+  background-color: #DC2626;
+}
+
+/* Dropdown styles */
+.dropdown-toggle {
+  background-color: transparent;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 6px;
+}
+
+.dropdown-toggle:hover {
+  background-color: rgba(255,255,255,0.15);
+}
+
+.dropdown {
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.dropdown.show {
+  display: flex;
+}
+
+.dropdown a {
+  padding: 6px 12px;
+  border-radius: 6px;
+  background-color: rgba(255,255,255,0.1);
+}
+
+.dropdown a:hover {
+  background-color: rgba(255,255,255,0.25);
+}
+
+/* Desktop: show all links inline and hide dropdown toggle */
+@media(min-width: 768px) {
+  .dropdown {
+    display: flex !important;
+    flex-direction: row;
+    gap: 10px;
+    margin-top: 0;
+    background: none;
+  }
+  .dropdown-toggle {
+    display: none;
+  }
+}

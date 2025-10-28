@@ -1,61 +1,52 @@
-// src/components/Navbar.js
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "../pages/Pages.css";
+import "./Navbar.css";
 
 export default function Navbar() {
   const navigate = useNavigate();
-
-  // Get user from localStorage (mocked auth)
   const user = JSON.parse(localStorage.getItem("user"));
+  const [showDropdown, setShowDropdown] = useState(false);
 
   const handleSignOut = () => {
     localStorage.removeItem("user");
-    navigate("/"); // redirect to login
+    navigate("/");
   };
 
   return (
-    <nav className="bg-[#005BB5] text-white px-6 py-4 flex flex-col md:flex-row justify-between items-center">
-      <h1 className="text-xl md:text-lg font-bold mb-2 md:mb-0">
-        MUBAS Clearance System
-      </h1>
+    <nav className="navbar">
+      <h1>MUBAS Clearance System</h1>
 
-      <div className="flex flex-col md:flex-row md:items-center space-y-2 md:space-y-0 md:space-x-4">
-        {/* Student Links */}
+      <div className="nav-links">
         {user?.role === "student" && (
           <>
-            <Link to="/student" className="hover:text-[#F5F7FA]">
-              Dashboard
-            </Link>
-            <Link to="/status" className="hover:text-[#F5F7FA]">
-              Clearance Status
-            </Link>
+            <Link to="/student">Dashboard</Link>
+            <Link to="/status">Clearance Status</Link>
           </>
         )}
 
-        {/* Department Links */}
         {user?.role === "department" && (
-          <Link to="/department" className="hover:text-[#F5F7FA]">
-            Department Dashboard
-          </Link>
+          <>
+            <Link to="/department">Dashboard</Link>
+            {/* Mobile dropdown toggle */}
+            <button
+              className="dropdown-toggle"
+              onClick={() => setShowDropdown(!showDropdown)}
+            >
+              Departments ▾
+            </button>
+
+            <div className={`dropdown ${showDropdown ? "show" : ""}`}>
+              <Link to="/department/finance">Finance</Link>
+              <Link to="/department/sports">Sports</Link>
+              <Link to="/department/library">Library</Link>
+              <Link to="/department/accommodation">Accommodation</Link>
+            </div>
+          </>
         )}
 
-        {/* Admin Links */}
-        {user?.role === "admin" && (
-          <Link to="/admin" className="hover:text-[#F5F7FA]">
-            Admin Dashboard
-          </Link>
-        )}
+        {user?.role === "admin" && <Link to="/admin">Admin Dashboard</Link>}
 
-        {/* Sign Out Button */}
-        {user && (
-          <button
-            onClick={handleSignOut}
-            className="bg-[#EF4444] hover:bg-[#DC2626] text-white font-semibold px-4 py-2 rounded-md transition-all"
-          >
-            Sign Out
-          </button>
-        )}
+        {user && <button onClick={handleSignOut}>Sign Out</button>}
       </div>
     </nav>
   );

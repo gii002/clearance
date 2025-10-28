@@ -1,95 +1,91 @@
-import React, { useContext } from "react";
-import { FaCheckCircle, FaHourglassHalf, FaDownload } from "react-icons/fa";
+import React, { useContext, useState } from "react";
+import { FaDownload } from "react-icons/fa";
 import { ClearanceContext } from "../context/ClearanceContext";
-import "./Pages.css";
+import "./StudentDashboard.css";
 
 export default function StudentDashboard() {
-  const { departments } = useContext(ClearanceContext);
+  const { student } = useContext(ClearanceContext);
 
-  const student = {
+  // For this example, we mock student data if not coming from context
+  const currentStudent = student || {
     name: "Gift Banda",
     regNo: "MUBAS/ICT/2023/001",
+    department: "ICT",
+    year: "2023",
   };
 
-  const total = departments.length;
-  const cleared = departments.filter((d) => d.status === "Cleared").length;
-  const progress = Math.round((cleared / total) * 100);
+  const [formData, setFormData] = useState({
+    finance: "N/A",
+    accommodation: "N/A",
+    library: "N/A",
+    sports: "N/A",
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    alert(
+      `Clearance submitted!\n\nFinance: ${formData.finance}\nAccommodation: ${formData.accommodation}\nLibrary: ${formData.library}\nSports: ${formData.sports}`
+    );
+  };
 
   const handleDownloadCertificate = () => {
     alert("🎓 Your digital clearance certificate will be available soon!");
   };
 
   return (
-    <div className="max-w-3xl mx-auto mt-10 bg-white shadow-md rounded-lg p-6">
-      {/* Header */}
-      <div className="text-center mb-6">
-        <h1 className="text-2xl font-bold text-blue-700">
-          Student Clearance Dashboard
-        </h1>
-        <p className="text-gray-600 mt-1">{student.name}</p>
-        <p className="text-gray-500 text-sm">{student.regNo}</p>
+    <div className="dashboard-container">
+      <div className="dashboard-header">
+        <h1>Student Clearance Form</h1>
+        <p className="student-name">{currentStudent.name}</p>
+        <p className="student-reg">{currentStudent.regNo}</p>
+        <p className="student-dept">{currentStudent.department} - {currentStudent.year}</p>
       </div>
 
-      {/* Progress bar */}
-      <div className="mb-6">
-        <p className="text-gray-700 font-semibold mb-2">Clearance Progress</p>
-        <div className="w-full bg-gray-200 rounded-full h-4">
-          <div
-            className={`h-4 rounded-full ${
-              progress === 100 ? "bg-green-600" : "bg-blue-600"
-            }`}
-            style={{ width: `${progress}%` }}
-          ></div>
-        </div>
-        <p className="text-sm text-gray-600 mt-1">{progress}% Completed</p>
+      <form className="clearance-form" onSubmit={handleSubmit}>
+        <label>Finance</label>
+        <input
+          type="text"
+          name="finance"
+          value={formData.finance}
+          onChange={handleChange}
+        />
 
-        <div className="mt-4 text-center">
-          <a
-            href="/status"
-            className="text-blue-700 hover:underline font-semibold"
-          >
-            View Clearance Details →
-          </a>
-        </div>
+        <label>Accommodation</label>
+        <input
+          type="text"
+          name="accommodation"
+          value={formData.accommodation}
+          onChange={handleChange}
+        />
+
+        <label>Library</label>
+        <input
+          type="text"
+          name="library"
+          value={formData.library}
+          onChange={handleChange}
+        />
+
+        <label>Sports</label>
+        <input
+          type="text"
+          name="sports"
+          value={formData.sports}
+          onChange={handleChange}
+        />
+
+        <button type="submit">Submit Clearance</button>
+      </form>
+
+      <div className="certificate-button-container">
+        <button onClick={handleDownloadCertificate}>
+          <FaDownload className="icon" /> Download Certificate
+        </button>
       </div>
-
-      {/* Department list */}
-      <div>
-        <h2 className="text-lg font-semibold mb-3 text-blue-700">
-          Department Status
-        </h2>
-        <ul className="space-y-3">
-          {departments.map((dept, index) => (
-            <li
-              key={index}
-              className="flex justify-between items-center border p-3 rounded-lg hover:bg-gray-50 transition"
-            >
-              <span className="font-medium">{dept.name}</span>
-              {dept.status === "Cleared" ? (
-                <span className="flex items-center text-green-600 font-semibold">
-                  <FaCheckCircle className="mr-2" /> Cleared
-                </span>
-              ) : (
-                <span className="flex items-center text-yellow-600 font-semibold">
-                  <FaHourglassHalf className="mr-2" /> Pending
-                </span>
-              )}
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      {/* Certificate button */}
-      {progress === 100 && (
-        <div className="text-center mt-8">
-          <button
-            onClick={handleDownloadCertificate}
-            className="bg-green-600 text-white px-6 py-2 rounded-md hover:bg-green-700 transition flex items-center justify-center mx-auto"
-          >
-            <FaDownload className="mr-2" /> Download Certificate
-          </button>
-        </div>
-      )}
     </div>
   );
 }
