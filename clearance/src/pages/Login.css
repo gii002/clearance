@@ -1,3 +1,14 @@
+.logo-container {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+}
+
+.login-logo {
+  width: 60px; /* smaller size */
+  height: auto;
+}
+
 /* src/pages/Login.css */
 
 body, html {
