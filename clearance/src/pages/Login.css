@@ -184,3 +184,12 @@ body, html {
     width: 50px;
   }
   }
+
+.logo-text {
+  font-size: 14px;
+  font-weight: bold;
+  color: #0a4fa3; /* matches the blue tone */
+  text-align: center;
+  margin-top: 5px;
+  letter-spacing: 1px;
+}
