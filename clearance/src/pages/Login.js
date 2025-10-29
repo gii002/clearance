@@ -43,7 +43,9 @@ export default function Login() {
       <div className="login-card">
         {/* ✅ Logo in top-left corner */}
         <div className="logo-container">
-          <img src={image} alt="Logo" className="login-logo" />
+          <img src={image} alt="Logo" className="login-logo"/>
+          <p className="logo-text">MCS</p>
+      
         </div>
 
         <h2 className="login-title">Login</h2>
