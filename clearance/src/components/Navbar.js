@@ -14,10 +14,10 @@ export default function Navbar() {
 
   return (
     <nav className="navbar">
-      <h1>MUBAS Clearance System</h1>
 
       <div className="nav-links">
         {user?.role === "student" && (
+          <h1>MUBAS Clearance System</h1>
           <>
             <Link to="/student">Dashboard</Link>
             <Link to="/status">Clearance Status</Link>
@@ -25,6 +25,7 @@ export default function Navbar() {
         )}
 
         {user?.role === "department" && (
+          <h1>MUBAS Clearance System</h1>
           <>
             <Link to="/department">Dashboard</Link>
             {/* Mobile dropdown toggle */}
