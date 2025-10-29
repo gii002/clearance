@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
-import image from "./image.jpg"; // ✅ Make sure your logo path is correct
+import image from "./image.jpg"; // ✅ Image import
 
 export default function Login() {
   const [role, setRole] = useState("student");
@@ -9,7 +9,6 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [departmentName, setDepartmentName] = useState("");
   const [deptPassword, setDeptPassword] = useState("");
-
   const navigate = useNavigate();
 
   const handleLogin = () => {
@@ -51,10 +50,7 @@ export default function Login() {
 
         <div className="form-group">
           <label>Select Role</label>
-          <select
-            value={role}
-            onChange={(e) => setRole(e.target.value)}
-          >
+          <select value={role} onChange={(e) => setRole(e.target.value)}>
             <option value="student">Student</option>
             <option value="department">Department</option>
             <option value="admin">Admin</option>
@@ -101,4 +97,4 @@ export default function Login() {
       </div>
     </div>
   );
-    }
+               
