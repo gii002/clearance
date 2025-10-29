@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
-import image from "../public/image.jpg"; // ✅ Make sure your logo path is correct
+import image from "./image.jpg"; // ✅ Make sure your logo path is correct
 
 export default function Login() {
   const [role, setRole] = useState("student");
