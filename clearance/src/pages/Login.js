@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
-import logo from "../public/logo.jpg"; // ✅ Make sure your logo path is correct
+import image from "../public/logo.jpg"; // ✅ Make sure your logo path is correct
 
 export default function Login() {
   const [role, setRole] = useState("student");
@@ -44,7 +44,7 @@ export default function Login() {
       <div className="login-card">
         {/* ✅ Logo in top-left corner */}
         <div className="logo-container">
-          <img src={logo} alt="Logo" className="login-logo" />
+          <img src={image} alt="Logo" className="login-logo" />
         </div>
 
         <h2 className="login-title">Login</h2>
